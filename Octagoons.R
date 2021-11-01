@@ -1,10 +1,3 @@
-## COPYRIGHT 2021, Octagoons, All Rights Reserved
-
-## Authors: Kevin Schubert, Zoila Rossi, Amber Jolly, Gavincko Alagesan
-
-## Usage of this script academically and professionally must be granted
-## permission by all authors.
-
 library(lubridate)
 
 S2D1 = read.csv("data/S2D1.csv")
@@ -71,8 +64,8 @@ df = rbind(S2D1, S2D2, S2D3)
 
 
 
-S3D1 = read.csv("data/S2D1.csv")
-S3D2 = read.csv("data/S2D2.csv")
+S3D1 = read.csv("data/S3D1.csv")
+S3D2 = read.csv("data/S3D2.csv")
 S3D3 = rbind(read.csv("data/S3D3.1.csv"), read.csv("data/S3D3.2.csv"), read.csv("data/S3D3.3.csv"))
 
 
@@ -3605,12 +3598,12 @@ x <- model.matrix(lm(stroop~permutation+immediate_action+recent_action+
 
 y <- df2$stroop
 lasso.mod <- glmnet(x,y,family="gaussian")
-plot(lasso.mod, xvar="lambda")
-#print(lasso.mod)
+plot(lasso.mod, xvar="lambda", main="Training Predictor Weights vs Lambda Values")
+print(lasso.mod)
 
 cv.lasso <- cv.glmnet(x,y, nfolds=10)
 plot(cv.lasso)
-#print(cv.lasso)
+print(cv.lasso)
 
 
 coef.min = coef(cv.lasso, s = "lambda.min")
@@ -3622,16 +3615,16 @@ x2 <- model.matrix(lm(DR~permutation+immediate_action+recent_action+
                        BPS+BPD+HR+Breathing_Rate+cadence, df2))[,-1]
 
 y2 <- df2$DR
-lasso.mod2 <- glmnet(x,y,family="gaussian")
+lasso.mod2 <- glmnet(x2,y2,family="gaussian")
 plot(lasso.mod2, xvar="lambda")
-#print(lasso.mod2)
+print(lasso.mod2)
 
 cv.lasso2 <- cv.glmnet(x2,y2, nfolds=10)
 plot(cv.lasso2)
-#print(cv.lasso)
+print(cv.lasso2) #DRÍ
 
 
-coef.min2 = coef(cv.lasso2, s = "lambda.min")
+Ícoef.min2 = coef(cv.lasso2, s = "lambda.min")
 coef.min2
 rownames(coef.min2)[coef.min2[,1] != 0][-1]
 
@@ -3641,15 +3634,16 @@ x3 <- model.matrix(lm(IR~permutation+immediate_action+recent_action+
                        BPS+BPD+HR+Breathing_Rate+cadence, df2))[,-1]
 
 y3 <- df2$IR
-lasso.mod3 <- glmnet(x,y,family="gaussian")
+lasso.mod3 <- glmnet(x3,y3,family="gaussian")
 plot(lasso.mod3, xvar="lambda")
-#print(lasso.mod3)
+print(lasso.mod3)
 
-cv.lasso3 <- cv.glmnet(x,y, nfolds=10)
+cv.lasso3 <- cv.glmnet(x3,y3, nfolds=10)
 plot(cv.lasso3)
-#print(cv.lasso)
+print(cv.lasso3) #IR
 
 
 coef.min3 = coef(cv.lasso3, s = "lambda.min")
 coef.min3
 rownames(coef.min3)[coef.min3[,1] != 0][-1]
+

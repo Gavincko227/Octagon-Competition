@@ -3621,10 +3621,10 @@ print(lasso.mod2)
 
 cv.lasso2 <- cv.glmnet(x2,y2, nfolds=10)
 plot(cv.lasso2)
-print(cv.lasso2) #DRÍ
+print(cv.lasso2)
 
 
-Ícoef.min2 = coef(cv.lasso2, s = "lambda.min")
+coef.min2 = coef(cv.lasso2, s = "lambda.min")
 coef.min2
 rownames(coef.min2)[coef.min2[,1] != 0][-1]
 
